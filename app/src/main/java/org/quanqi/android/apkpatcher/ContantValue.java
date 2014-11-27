@@ -1,4 +1,4 @@
-package com.dodola.patcher;
+package org.quanqi.android.apkpatcher;
 
 public interface ContantValue {
     /**

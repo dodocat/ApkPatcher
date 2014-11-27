@@ -1,12 +1,12 @@
-package com.dodola.patcher.engineImpl;
+package org.quanqi.android.apkpatcher.engineImpl;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.dodola.patcher.ContantValue;
-import com.dodola.patcher.engine.PatcherEngine;
-import com.dodola.patcher.utils.ApkInfoTool;
-import com.dodola.patcher.utils.HttpClientUtils;
+import org.quanqi.android.apkpatcher.ContantValue;
+import org.quanqi.android.apkpatcher.engine.PatcherEngine;
+import org.quanqi.android.apkpatcher.utils.ApkInfoTool;
+import org.quanqi.android.apkpatcher.utils.HttpClientUtils;
 
 
 /**

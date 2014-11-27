@@ -1,4 +1,4 @@
-package com.dodola.patcher.utils;
+package org.quanqi.android.apkpatcher.utils;
 
 
 import android.app.AlertDialog;
@@ -10,7 +10,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.dodola.patcher.R;
+import org.quanqi.android.apkpatcher.R;
 
 
 /**

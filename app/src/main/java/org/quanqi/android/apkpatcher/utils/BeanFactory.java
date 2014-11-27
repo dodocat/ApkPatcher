@@ -1,9 +1,7 @@
-package com.dodola.patcher.utils;
+package org.quanqi.android.apkpatcher.utils;
 
-import com.dodola.patcher.engineImpl.PatcherEngineImpl;
+import org.quanqi.android.apkpatcher.engineImpl.PatcherEngineImpl;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -19,8 +17,7 @@ public class BeanFactory {
 
     static {
         properties = new Properties();
-        properties.setProperty("PatcherEngine", "com.dodola.patcher.engineImpl.PatcherEngineImpl");
-
+        properties.setProperty("PatcherEngine", "org.quanqi.apkpatcher.engineImpl.PatcherEngineImpl");
     }
 
     /**

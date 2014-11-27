@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <android/log.h>
 
-JNIEXPORT jint JNICALL Java_com_dodola_patcher_MainActivity_patcher(JNIEnv* env,
+JNIEXPORT jint JNICALL Java_org_quanqi_android_apkpatcher_MainActivity_patcher(JNIEnv* env,
 		jobject othis, jstring argv1, jstring argv2, jstring argv3) {
 	char ** argv;
 	int loopVar,result;

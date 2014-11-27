@@ -1,4 +1,4 @@
-package com.dodola.patcher;
+package org.quanqi.android.apkpatcher;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,12 +20,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dodola.patcher.engine.PatcherEngine;
-import com.dodola.patcher.utils.ApkInfoTool;
-import com.dodola.patcher.utils.BeanFactory;
-import com.dodola.patcher.utils.DownloadManager;
-import com.dodola.patcher.utils.PromptManager;
-import com.dodola.patcher.utils.YouHttpTask;
+import org.quanqi.android.apkpatcher.engine.PatcherEngine;
+import org.quanqi.android.apkpatcher.utils.ApkInfoTool;
+import org.quanqi.android.apkpatcher.utils.BeanFactory;
+import org.quanqi.android.apkpatcher.utils.DownloadManager;
+import org.quanqi.android.apkpatcher.utils.PromptManager;
+import org.quanqi.android.apkpatcher.utils.YouHttpTask;
 
 import java.io.File;
 import java.io.IOException;

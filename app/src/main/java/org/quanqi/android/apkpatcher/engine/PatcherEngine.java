@@ -1,4 +1,4 @@
-package com.dodola.patcher.engine;
+package org.quanqi.android.apkpatcher.engine;
 
 import android.content.Context;
 

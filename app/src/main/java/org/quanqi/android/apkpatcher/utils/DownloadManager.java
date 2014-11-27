@@ -1,4 +1,4 @@
-package com.dodola.patcher.utils;
+package org.quanqi.android.apkpatcher.utils;
 
 import android.app.ProgressDialog;
 

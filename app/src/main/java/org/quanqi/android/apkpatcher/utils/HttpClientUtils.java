@@ -1,11 +1,11 @@
-package com.dodola.patcher.utils;
+package org.quanqi.android.apkpatcher.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
-import com.dodola.patcher.GloableParams;
+import org.quanqi.android.apkpatcher.GloableParams;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;

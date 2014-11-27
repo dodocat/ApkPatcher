@@ -1,4 +1,4 @@
-package com.dodola.patcher.utils;
+package org.quanqi.android.apkpatcher.utils;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-import com.dodola.patcher.GloableParams;
+import org.quanqi.android.apkpatcher.GloableParams;
 
 public class NetUtils {
     private static Uri PREFERRED_APN_URI = Uri.parse("content://telephony/carriers/preferapn");// 4.0模拟器屏蔽掉该权限
