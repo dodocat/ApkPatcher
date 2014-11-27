@@ -1,1 +1,2 @@
-APP_PLATFORM=android-8#指定platform为8，否则编译报错
+APP_PLATFORM=android-8
+APP_CFLAGS += -Wno-error=format-security
