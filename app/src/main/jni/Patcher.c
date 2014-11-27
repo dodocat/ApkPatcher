@@ -9,7 +9,7 @@ JNIEXPORT jint JNICALL Java_org_quanqi_android_apkpatcher_MainActivity_patcher(J
 	char ** argv;
 	int loopVar,result;
 
-	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "开始打包之。。。。。。");
+	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "start patching...");
 	argv = (char**) malloc(4 * sizeof(char*));
 	for (loopVar = 0; loopVar < 4; loopVar++) {
 		argv[loopVar] = (char*) malloc(100 * sizeof(char));

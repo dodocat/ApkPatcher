@@ -70,22 +70,12 @@ int bspatch(char **argv)
 	off_t lenread;
 	off_t i;
 
-	// !!! CHANGE !!!
 	int 	argc;
 	int		loopVar;
 
 	argc = 4;
 
-	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", argv[0]);
-	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", argv[1]);
-	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", argv[2]);
-	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", argv[3]);
-
-	// !!! END CHANGE !!!
-
 	if(argc!=4) errx(1,"usage: %s oldfile newfile patchfile\n",argv[0]);
-
-	// !!! CHANGE !!!
 
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 0");
 
@@ -93,17 +83,13 @@ int bspatch(char **argv)
 	f = fopen(argv[3], "r");
 	if (f == NULL)
 	{
-		__android_log_print(ANDROID_LOG_INFO, "bspatch.c ERROR",
-				argv[3]);
+		__android_log_print(ANDROID_LOG_ERROR, "bspatch.c ERROR", argv[3]);
 		return (-1);
 	}
 	else
 	{
-		__android_log_print(ANDROID_LOG_INFO, "bspatch.c",
-				"Patch is opened");
+		__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Patch is opened");
 	}
-
-	// !!! END CHANGE !!!
 
 	/* Open patch file */
 	//if ((f = fopen(argv[3], "r")) == NULL)
@@ -123,11 +109,7 @@ int bspatch(char **argv)
 	extra block; seek forwards in oldfile by z bytes".
 	*/
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 1");
-
-	// !!! END CHANGE !!!
 
 	/* Read header */
 	if (fread(header, 1, 32, f) < 32) {
@@ -136,21 +118,15 @@ int bspatch(char **argv)
 		err(1, "fread(%s)", argv[3]);
 	}
 
-	// !!! CHANGE !!!
 
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 2");
-
-	// !!! END CHANGE !!!
 
 	/* Check for appropriate magic */
 	if (memcmp(header, "BSDIFF40", 8) != 0)
 		errx(1, "Corrupt patch\n");
 
-	// !!! CHANGE !!!
 
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 3");
-
-	// !!! END CHANGE !!!
 
 	/* Read lengths from header */
 	bzctrllen=offtin(header+8);
@@ -159,11 +135,7 @@ int bspatch(char **argv)
 	if((bzctrllen<0) || (bzdatalen<0) || (newsize<0))
 		errx(1,"Corrupt patch\n");
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 4");
-
-	// !!! END CHANGE !!!
 
 	/* Close patch file and re-open it via libbzip2 at the right places */
 	if (fclose(f))
@@ -190,11 +162,7 @@ int bspatch(char **argv)
 	if ((epfbz2 = BZ2_bzReadOpen(&ebz2err, epf, 0, 0, NULL, 0)) == NULL)
 		errx(1, "BZ2_bzReadOpen, bz2err = %d", ebz2err);
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 5");
-
-	// !!! END CHANGE !!!
 
 	if(((fd=open(argv[1],O_RDONLY,0))<0) ||
 		((oldsize=lseek(fd,0,SEEK_END))==-1) ||
@@ -204,11 +172,7 @@ int bspatch(char **argv)
 		(close(fd)==-1)) err(1,"%s",argv[1]);
 	if((new=malloc(newsize+1))==NULL) err(1,NULL);
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 6");
-
-	// !!! END CHANGE !!!
 
 	oldpos=0;newpos=0;
 	while(newpos<newsize) {
@@ -255,11 +219,7 @@ int bspatch(char **argv)
 		oldpos+=ctrl[2];
 	};
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 7");
-
-	// !!! END CHANGE !!!
 
 	/* Clean up the bzip2 reads */
 	BZ2_bzReadClose(&cbz2err, cpfbz2);
@@ -268,36 +228,21 @@ int bspatch(char **argv)
 	if (fclose(cpf) || fclose(dpf) || fclose(epf))
 		err(1, "fclose(%s)", argv[3]);
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 8");
-
-	// !!! END CHANGE !!!
 
 	/* Write the new file */
 	if(((fd=open(argv[2],O_CREAT|O_TRUNC|O_WRONLY,0666))<0) ||
 		(write(fd,new,newsize)!=newsize) || (close(fd)==-1))
 		err(1,"%s",argv[2]);
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 9");
-
-	// !!! END CHANGE !!!
 
 	free(new);
 	free(old);
 
-	// !!! CHANGE !!!
-
 	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "Point 10");
-
-
-
-	// !!! END CHANGE !!!
-
-	__android_log_print(ANDROID_LOG_INFO, "bspatch.c", "理论上此处就成功了");
-
+	__android_log_print(ANDROID_LOG_INFO, "bspatch.c",
+	    "bspatch finished with return code 0");
 
 	return 0;
 }
