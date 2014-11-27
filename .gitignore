@@ -39,3 +39,6 @@ _sandbox
 # Backup files
 *~
 *.bak
+
+app/src/main/obj/
+app/src/main/libs/
