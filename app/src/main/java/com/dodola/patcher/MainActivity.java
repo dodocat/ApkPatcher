@@ -79,7 +79,7 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         rootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
         setContentView(R.layout.activity_main);
-        checkOut();
+        //checkOut();
         initView();
         setListenet();
     }
@@ -99,12 +99,14 @@ public class MainActivity extends Activity implements OnClickListener {
     private void initView() {
         btn = (Button) this.findViewById(R.id.button1);
         mTxtOld = (EditText) this.findViewById(R.id.text_old);
+
         mTxtNew = (EditText) this.findViewById(R.id.text_new);
         mTxtPatcher = (EditText) this.findViewById(R.id.text_patcher);
-
-        Log.i(tag, String.valueOf(ApkInfoTool.getVersionCode(this)));
-        Log.i(tag, ApkInfoTool.getVersionName(this));
-
+        mTxtOld.setText("/sdcard/Download/1.apk");
+        mTxtNew.setText("2");
+        mTxtPatcher.setText("/sdcard/Download/1-2.p");
+        Log.i(tag, "version code: " + String.valueOf(ApkInfoTool.getVersionCode(getApplicationContext())));
+        Log.i(tag, "version name: " + ApkInfoTool.getVersionName(getApplicationContext()));
     }
 
     /**
@@ -206,7 +208,9 @@ public class MainActivity extends Activity implements OnClickListener {
             protected void onPostExecute(Object result) {
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, "打包完成，安装。。。。", Toast.LENGTH_SHORT).show();
-//		        installApk();
+                String newApk = rootPath + File.separator + mTxtNew.getText().toString() + ".apk";
+
+                installApk(newApk);
 
             }
 
@@ -330,7 +334,7 @@ public class MainActivity extends Activity implements OnClickListener {
                         ;
                     }.start();
                 } else {
-                    Toast.makeText(getApplicationContext(), "sd卡不可用", 0).show();
+                    Toast.makeText(getApplicationContext(), "sd卡不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -338,7 +342,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "下次再说", 0).show();
+                Toast.makeText(getApplicationContext(), "下次再说", Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();

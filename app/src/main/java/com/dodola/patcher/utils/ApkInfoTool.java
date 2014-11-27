@@ -17,7 +17,6 @@ import java.io.IOException;
 
 /**
  * 获取apk信息
- *
  */
 public class ApkInfoTool {
     private static final String tag = null;
@@ -49,14 +48,16 @@ public class ApkInfoTool {
     public static String getVersionName(Context context) {
 
         PackageManager pm = context.getPackageManager();
+        ApplicationInfo applicationInfo = context.getApplicationInfo();
+
+
+        PackageInfo packageInfo = null;
         try {
-            PackageInfo packinfo = pm.getPackageInfo(context.getPackageName(),
-                    0);
-            return packinfo.versionName;
+            packageInfo = pm.getPackageInfo(applicationInfo.packageName, 0);
+            return packageInfo.versionName;
         } catch (NameNotFoundException e) {
             e.printStackTrace();
-            // todo: can't reach
-            return "";
+            return null;
         }
     }
 
@@ -67,15 +68,15 @@ public class ApkInfoTool {
      * @return
      */
     public static int getVersionCode(Context context) {
-
         PackageManager pm = context.getPackageManager();
         try {
-            PackageInfo packinfo = pm.getPackageInfo(context.getPackageName(),
-                    0);
-            return packinfo.versionCode;
+            Log.i(ApkInfoTool.class.getSimpleName(),
+                    "get version code for: " + context.getPackageName());
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
         } catch (NameNotFoundException e) {
             e.printStackTrace();
-            return 0;
+            return -1;
         }
     }
 
