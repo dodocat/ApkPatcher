@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -162,16 +163,16 @@ public class MainActivity extends Activity implements OnClickListener {
      */
     private boolean isFileEmpty() {
         if (TextUtils.isEmpty(mTxtOld.getText().toString())) {
-            Toast.makeText(MainActivity.this, "请选择旧版本文件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getString(R.string.toas_select_old_file_hint), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (TextUtils.isEmpty(mTxtNew.getText().toString())) {
-            Toast.makeText(MainActivity.this, "请输入合并后新版本文件名", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getString(R.string.toast_input_output_filename_hint), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (TextUtils.isEmpty(mTxtPatcher.getText().toString())) {
-            Toast.makeText(MainActivity.this, "请选择补丁文件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getString(R.string.toast_select_patch_file_hint), Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -188,7 +189,9 @@ public class MainActivity extends Activity implements OnClickListener {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressDialog = ProgressDialog.show(MainActivity.this, "正在生成APK...", "请稍等...", true, false);
+                progressDialog = ProgressDialog.show(MainActivity.this,
+                        getString(R.string.generating_apk),
+                        getString(R.string.please_wait), true, false);
                 progressDialog.show();
             }
 
@@ -197,7 +200,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 String newApk = rootPath + File.separator + mTxtNew.getText().toString() + ".apk";
                 File file = new File(newApk);
                 if (file.exists())
-                    file.delete();//如果newApk文件已经存在,先删除
+                    file.delete();
 
                 //调用.so库中的方法,把增量包和老的apk包合并成新的apk
                 patcher(mTxtOld.getText().toString(), newApk, mTxtPatcher.getText().toString());
@@ -223,7 +226,7 @@ public class MainActivity extends Activity implements OnClickListener {
      */
     private void installApk(String filePath) {
         Intent i = new Intent(Intent.ACTION_VIEW);
-//		String filePath = rootPath + File.separator + mTxtNew.getText().toString() + ".apk";
+        // String filePath = rootPath + File.separator + mTxtNew.getText().toString() + ".apk";
         i.setDataAndType(Uri.parse("file://" + filePath), "application/vnd.android.package-archive");
         startActivity(i);
     }
@@ -232,7 +235,6 @@ public class MainActivity extends Activity implements OnClickListener {
      * 检测新版本
      */
     public void checkOut() {
-
         YouHttpTask<Context, Boolean> task = new YouHttpTask<Context, Boolean>() {
 
             @Override
@@ -251,14 +253,13 @@ public class MainActivity extends Activity implements OnClickListener {
 
             @Override
             protected void onPostExecute(Boolean result) {
-                Log.i(tag, "修改之前.............");
                 if (result) {
                     showUpdateDialog();
                     PromptManager.closeProgressDialog();
                     super.onPostExecute(result);
                 } else {
                     PromptManager.closeProgressDialog();
-                    PromptManager.showToast(getApplicationContext(), "版本已经是最新的...");
+                    PromptManager.showToast(getApplicationContext(), "Already latest version...");
                 }
             }
         };

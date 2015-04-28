@@ -4,5 +4,10 @@
     <string name="app_name">Patcher</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="toas_select_old_file_hint">请选择旧版本文件</string>
+    <string name="toast_input_output_filename_hint">请输入合并后新版本文件名</string>
+    <string name="toast_select_patch_file_hint">请选择补丁文件</string>
+    <string name="generating_apk">正在生成APK...</string>
+    <string name="please_wait">请稍等...</string>
 
 </resources>
