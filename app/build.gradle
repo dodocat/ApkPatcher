@@ -44,7 +44,7 @@ dependencies {
 
 
 task ndkBuild(type: Exec) {
-    def ndkDir = project.plugins.findPlugin('com.android.application').getNdkFolder()
+    def ndkDir = plugins.getPlugin('com.android.application').sdkHandler.ndkFolder
     def ndkCmd = '' + ndkDir + '/ndk-build'
     commandLine ndkCmd , '-C', file('src/main/jni').absolutePath
 }
